@@ -8,7 +8,7 @@ on:
       - ga-ignore-
 
 env:
-  MIRROR_URL: "git@github.com:EpitechPromo2026/B-MAT-400-BDX-4-1-205IQ-luka.camus.git"
+  MIRROR_URL: "git@github.com:EpitechPromo2026/B-CCP-400-BDX-4-1-panoramix-luka.camus.git"
   EXECUTABLES: "panoramix"
 
 jobs:
