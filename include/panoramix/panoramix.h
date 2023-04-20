@@ -8,6 +8,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdio.h>
 
 #define EPI_SUCCESS 0
 #define EPI_FAILURE 84
@@ -17,6 +18,12 @@
     "USAGE: ./panoramix <nb_villagers> <pot_size> <nb_fights> <nb_refills>\n"
 #define ARGS_REQUIRED 5
 #define ARG_ERROR "Panoramix: %s value must be > 0.\n"
+
+static inline int print_usage(int stdfd)
+{
+    dprintf(stdfd, USAGE);
+    return EPI_FAILURE;
+}
 
 /*structures */
 typedef struct panoramix_s {

@@ -5,9 +5,14 @@
 ** main
 */
 
+#include <panoramix/functions.h>
 #include <panoramix/panoramix.h>
 
 int main(int argc, char *const argv[])
 {
-    return EPI_SUCCESS;
+    panoramix_t pano = {0};
+
+    if (parse_args(&pano, argc, argv) != EPI_SUCCESS)
+        return EPI_FAILURE;
+    return launch_battle(&pano);
 }
