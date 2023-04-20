@@ -31,7 +31,7 @@ CheckOptions:
     value:           lower_case
 
   - key:             readability-identifier-naming.GlobalVariableCase
-    value:           UPPER_CASE
+    value:           lower_case
 
   - key:             readability-identifier-naming.NamespaceCase
     value:           camelCase

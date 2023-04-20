@@ -22,6 +22,22 @@
 #define ARG_VALUE_ERROR "Panoramix: %d value must be > 0.\n"
 #define ARG_TYPE_ERROR "Panoramix: %s value must be a number.\n"
 
+/* Villager messages */
+#define VILLAGER_START "Villager %d: Going into battle !\n"
+#define VILLAGER_POTION \
+    "Villager %d: I need a drink... I see %d servings left.\n"
+#define VILLAGER_CALL "Villager %d: Hey Pano wake up ! We need more potion.\n"
+#define VILLAGER_FIGHTING "Villager %d: Take that roman scum ! Only %d left.\n"
+#define VILLAGER_SLEEP "Villager %d: I'm going to sleep now.\n"
+
+/* Druid messages */
+#define DRUID_START "Druid: I'm ready... but sleepy...\n"
+#define DRUID_REFILL \
+    "Druid: Ah! Yes, yes , I'm awake! Working on it! Beware I can only make " \
+    "%d more refills after this one.\n"
+#define DRUID_SLEEP "Druid: I'm out of viscum. I'm going back to... zZz\n"
+
+/* print error messages */
 static inline int print_usage(int stdfd)
 {
     dprintf(stdfd, USAGE);
