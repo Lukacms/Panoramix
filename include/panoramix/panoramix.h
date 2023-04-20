@@ -7,10 +7,22 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #define EPI_SUCCESS 0
 #define EPI_FAILURE 84
 
+/* argument handling */
 #define USAGE \
     "USAGE: ./panoramix <nb_villagers> <pot_size> <nb_fights> <nb_refills>\n"
+#define ARGS_REQUIRED 5
+#define ARG_ERROR "Panoramix: %s value must be > 0.\n"
 
-int launch_battle(void);
+/*structures */
+typedef struct panoramix_s {
+    size_t nb_villagers;
+    size_t pot_size;
+    size_t pot_left;
+    size_t nb_fights;
+    size_t nb_refills;
+} panoramix_t;
