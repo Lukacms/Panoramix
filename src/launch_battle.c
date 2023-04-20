@@ -5,4 +5,7 @@
 ** launch_battle
 */
 
-int launch_battle(void) { return 0; }
+int launch_battle(void)
+{
+    return 0;
+}

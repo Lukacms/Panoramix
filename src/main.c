@@ -7,4 +7,7 @@
 
 #include <panoramix/panoramix.h>
 
-int main(int argc, char *const argv[]) { return EPI_SUCCESS; }
+int main(int argc, char *const argv[])
+{
+    return EPI_SUCCESS;
+}
