@@ -37,23 +37,6 @@
     "%d more refills after this one.\n"
 #define DRUID_SLEEP "Druid: I'm out of viscum. I'm going back to... zZz\n"
 
-/* print error messages */
-static inline int print_usage(int stdfd)
-{
-    dprintf(stdfd, USAGE);
-    return (stdfd == STDOUT_FILENO ? EPI_SUCCESS : EPI_FAILURE);
-}
-
-static inline int print_error(char *str, ...)
-{
-    va_list args = {0};
-
-    va_start(args, str);
-    dprintf(STDERR_FILENO, str, args);
-    va_end(args);
-    return EPI_FAILURE;
-}
-
 /*structures */
 typedef struct panoramix_s {
     size_t nb_villagers;

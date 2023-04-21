@@ -5,6 +5,7 @@
 ** parse_args
 */
 
+#include <panoramix/functions.h>
 #include <panoramix/panoramix.h>
 #include <stdlib.h>
 #include <unistd.h>
