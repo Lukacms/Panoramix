@@ -8,7 +8,9 @@
 CC	=	gcc
 
 SRC	=	src/launch_battle.c	\
-		src/parse_args.c	\
+		src/arguments/parse_args.c	\
+		src/arguments/fill_infos.c	\
+		src/utils/array_len.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

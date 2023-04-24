@@ -8,6 +8,9 @@
 #pragma once
 
 #include <panoramix/panoramix.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 
 /* print error messages */
 static inline int print_usage(int stdfd)
@@ -16,18 +19,18 @@ static inline int print_usage(int stdfd)
     return (stdfd == STDOUT_FILENO ? EPI_SUCCESS : EPI_FAILURE);
 }
 
-static inline int print_error(char *str, ...)
+static inline int print_error(char *str, char *arg)
 {
-    va_list args = {0};
-
-    va_start(args, str);
-    dprintf(STDERR_FILENO, str, args);
-    va_end(args);
+    dprintf(STDERR_FILENO, str, arg);
     return EPI_FAILURE;
 }
 
 /* argument handling */
 int parse_args(panoramix_t *pano, int argc, char *const argv[]);
+int fill_infos(panoramix_t *pano, char *const argv[]);
 
 /* program */
 int launch_battle(panoramix_t *pano);
+
+/* utils */
+int array_len(const void *arr);

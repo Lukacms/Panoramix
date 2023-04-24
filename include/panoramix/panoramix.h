@@ -7,20 +7,26 @@
 
 #pragma once
 
-#include <stdarg.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <unistd.h>
 
 #define EPI_SUCCESS 0
 #define EPI_FAILURE 84
+
+/* arguments positions */
+#define NB_VILLAGERS 0
+#define POT_SIZE 1
+#define NB_FIGHTS 2
+#define NB_REFILLS 3
 
 /* argument handling */
 #define USAGE \
     "USAGE: ./panoramix <nb_villagers> <pot_size> <nb_fights> <nb_refills>\n"
 #define ARGS_REQUIRED 5
-#define ARG_VALUE_ERROR "Panoramix: %d value must be > 0.\n"
+#define ARG_VALUE_ERROR "Panoramix: %s value must be > 0.\n"
 #define ARG_TYPE_ERROR "Panoramix: %s value must be a number.\n"
+#define VILLAGERS_ALLOC_ERROR "Panoramix: villagers could not be allocated.\n"
 
 /* Villager messages */
 #define VILLAGER_START "Villager %d: Going into battle !\n"
@@ -38,10 +44,19 @@
 #define DRUID_SLEEP "Druid: I'm out of viscum. I'm going back to... zZz\n"
 
 /*structures */
-typedef struct panoramix_s {
-    size_t nb_villagers;
+typedef struct druid_s {
+    size_t nb_refills;
     size_t pot_size;
     size_t pot_left;
-    size_t nb_fights;
-    size_t nb_refills;
+} druid_t;
+
+typedef struct villager_s {
+    size_t fights_left;
+    ssize_t id;
+    bool fighting;
+} villager_t;
+
+typedef struct panoramix_s {
+    druid_t druid;
+    villager_t *villagers;
 } panoramix_t;
