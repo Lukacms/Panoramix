@@ -8,11 +8,14 @@
 #include <panoramix/functions.h>
 #include <panoramix/panoramix.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <stddef.h>
 #include <stdio.h>
 
-static panoramix_t *pano = NULL;
-static pthread_mutex_t potion = {0};
+static panoramix_t *pano;
+static pthread_mutex_t potion;
+
+// static sem_t villagers;
 
 static void *villager_battling(void *_ind)
 {
@@ -24,10 +27,11 @@ static void *villager_battling(void *_ind)
             pano->villagers[ind].fights_left -= 1;
             printf(VILLAGER_FIGHTING, ind, pano->villagers[ind].fights_left);
             pano->villagers[ind].fighting = false;
+            continue;
         }
-        pthread_mutex_lock(&potion);
+        pthread_mutex_trylock(&potion);
+        printf(VILLAGER_POTION, ind, pano->druid.pot_left);
         if (pano->druid.pot_left > 0) {
-            printf(VILLAGER_POTION, ind, pano->druid.pot_left);
             pano->druid.pot_left -= 1;
             pano->villagers[ind].fighting = true;
         } else if (pano->druid.nb_refills > 0) {
@@ -61,12 +65,13 @@ int launch_battle(panoramix_t *infos)
     if (!(pano = infos))
         return EPI_FAILURE;
     pthread_mutex_init(&potion, NULL);
-    if (pthread_create(tid, NULL, &druid_sleeping, NULL) < 0)
+    if (pthread_create(&tid[0], NULL, &druid_sleeping, NULL) < 0)
         return EPI_FAILURE;
     for (size_t i = 1; i <= pano->nb_villagers; i++)
         if (pthread_create(&tid[i], NULL, &villager_battling, (void *)i) < 0)
             return EPI_FAILURE;
     for (size_t i = 0; i <= pano->nb_villagers; i++)
         pthread_join(tid[i], NULL);
+    pthread_mutex_destroy(&potion);
     return EPI_SUCCESS;
 }
