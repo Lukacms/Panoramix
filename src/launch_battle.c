@@ -5,6 +5,7 @@
 ** launch_battle
 */
 
+#include <panoramix/functions.h>
 #include <panoramix/panoramix.h>
 #include <pthread.h>
 #include <stddef.h>
@@ -15,10 +16,28 @@ static pthread_mutex_t potion = {0};
 
 static void *villager_battling(void *_ind)
 {
-    size_t ind = (size_t)_ind;
+    size_t ind = (size_t)_ind - 1;
 
     printf(VILLAGER_START, ind);
     while (pano->villagers[ind].fights_left > 0) {
+        if (pano->villagers[ind].fighting) {
+            pano->villagers[ind].fights_left -= 1;
+            printf(VILLAGER_FIGHTING, ind, pano->villagers[ind].fights_left);
+            pano->villagers[ind].fighting = false;
+        }
+        pthread_mutex_lock(&potion);
+        if (pano->druid.pot_left > 0) {
+            printf(VILLAGER_POTION, ind, pano->druid.pot_left);
+            pano->druid.pot_left -= 1;
+            pano->villagers[ind].fighting = true;
+        } else if (pano->druid.nb_refills > 0) {
+            printf(VILLAGER_CALL, ind);
+            pano->druid.nb_refills -= 1;
+            pano->druid.pot_left = pano->druid.pot_size;
+            printf(DRUID_REFILL, pano->druid.nb_refills);
+        } else
+            break;
+        pthread_mutex_unlock(&potion);
     }
     printf(VILLAGER_SLEEP, ind);
     return NULL;
@@ -27,7 +46,9 @@ static void *villager_battling(void *_ind)
 static void *druid_sleeping(void __attribute__((unused)) * data)
 {
     printf(DRUID_START);
-    while (pano->druid.nb_refills > 0 && pano->druid.pot_left > 0) {
+    while (pano->druid.nb_refills > 0 || pano->druid.pot_left > 0) {
+        if (!villagers_fighting(pano->villagers))
+            break;
     }
     printf(DRUID_SLEEP);
     return NULL;

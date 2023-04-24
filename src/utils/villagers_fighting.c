@@ -11,7 +11,7 @@
 bool villagers_fighting(villager_t *gauls)
 {
     for (int i = 0; gauls[i].id >= 0; i++) {
-        if (gauls[i].fighting)
+        if (gauls[i].fights_left > 0)
             return true;
     }
     return false;

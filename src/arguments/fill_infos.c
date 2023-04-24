@@ -18,7 +18,7 @@ static villager_t *villagers_dna(int fights, int population)
         return NULL;
     for (int i = 0; i < population; i++) {
         villagers[i].id = i;
-        villagers[i].fighting = true;
+        villagers[i].fighting = false;
         villagers[i].fights_left = fights;
     }
     villagers[population] = (villager_t){0};

@@ -30,7 +30,7 @@ int parse_args(panoramix_t *pano, int argc, char *const argv[]);
 int fill_infos(panoramix_t *pano, char *const argv[]);
 
 /* program */
-int launch_battle(panoramix_t *pano);
+int launch_battle(panoramix_t *infos);
 
 /* utils */
 int array_len(const void *arr);
