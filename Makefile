@@ -11,6 +11,7 @@ SRC	=	src/launch_battle.c	\
 		src/arguments/parse_args.c	\
 		src/arguments/fill_infos.c	\
 		src/utils/array_len.c	\
+		src/utils/villagers_fighting.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

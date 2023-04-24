@@ -40,9 +40,9 @@ int fill_infos(panoramix_t *pano, char *const argv[])
 {
     if (!pano || !argv || array_len(argv) != 4)
         return EPI_FAILURE;
+    pano->nb_villagers = atoi(argv[NB_VILLAGERS]);
     pano->druid = druid_dna(argv);
-    pano->villagers =
-        villagers_dna(atoi(argv[NB_FIGHTS]), atoi(argv[NB_VILLAGERS]));
+    pano->villagers = villagers_dna(atoi(argv[NB_FIGHTS]), pano->nb_villagers);
     if (!pano->villagers)
         return print_error(VILLAGERS_ALLOC_ERROR, "");
     return EPI_SUCCESS;

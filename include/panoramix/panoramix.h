@@ -29,12 +29,12 @@
 #define VILLAGERS_ALLOC_ERROR "Panoramix: villagers could not be allocated.\n"
 
 /* Villager messages */
-#define VILLAGER_START "Villager %d: Going into battle !\n"
+#define VILLAGER_START "Villager %zu: Going into battle !\n"
 #define VILLAGER_POTION \
-    "Villager %d: I need a drink... I see %d servings left.\n"
-#define VILLAGER_CALL "Villager %d: Hey Pano wake up ! We need more potion.\n"
-#define VILLAGER_FIGHTING "Villager %d: Take that roman scum ! Only %d left.\n"
-#define VILLAGER_SLEEP "Villager %d: I'm going to sleep now.\n"
+    "Villager %zu: I need a drink... I see %d servings left.\n"
+#define VILLAGER_CALL "Villager %zu: Hey Pano wake up ! We need more potion.\n"
+#define VILLAGER_FIGHTING "Villager %zu: Take that roman scum ! Only %d left.\n"
+#define VILLAGER_SLEEP "Villager %zu: I'm going to sleep now.\n"
 
 /* Druid messages */
 #define DRUID_START "Druid: I'm ready... but sleepy...\n"
@@ -59,4 +59,5 @@ typedef struct villager_s {
 typedef struct panoramix_s {
     druid_t druid;
     villager_t *villagers;
+    size_t nb_villagers;
 } panoramix_t;

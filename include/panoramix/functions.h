@@ -34,3 +34,4 @@ int launch_battle(panoramix_t *pano);
 
 /* utils */
 int array_len(const void *arr);
+bool villagers_fighting(villager_t *gauls);
