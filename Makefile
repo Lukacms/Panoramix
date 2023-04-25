@@ -19,7 +19,8 @@ SRC_MAIN	=	src/main.c	\
 
 OBJ_MAIN	=	$(SRC_MAIN:.c=.o)
 
-SRC_TESTS	=
+SRC_TESTS	=	tests/tests_redirect.c	\
+				tests/tests_parse_args.c	\
 
 OBJ_TESTS	=	$(SRC_TESTS:.c=.o)
 
