@@ -27,7 +27,7 @@ static inline int print_error(char *str, char *arg)
 
 /* argument handling */
 int parse_args(panoramix_t *pano, int argc, char *const argv[]);
-int fill_infos(panoramix_t *pano, char *const argv[]);
+int fill_infos(panoramix_t *pano, char *const argv[], int argc);
 
 /* program */
 int launch_battle(panoramix_t *infos);

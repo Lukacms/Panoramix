@@ -36,9 +36,9 @@ static druid_t druid_dna(char *const argv[])
     return druid;
 }
 
-int fill_infos(panoramix_t *pano, char *const argv[])
+int fill_infos(panoramix_t *pano, char *const argv[], int argc)
 {
-    if (!pano || !argv || array_len(argv) != 4)
+    if (!pano || !argv || argc != 4)
         return EPI_FAILURE;
     pano->nb_villagers = atoi(argv[NB_VILLAGERS]);
     pano->druid = druid_dna(argv);

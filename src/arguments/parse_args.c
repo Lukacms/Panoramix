@@ -34,5 +34,5 @@ int parse_args(panoramix_t *pano, int argc, char *const argv[])
         if (arg_check_positive_int(argv[i]) != EPI_SUCCESS)
             return EPI_FAILURE;
     }
-    return fill_infos(pano, argv + 1);
+    return fill_infos(pano, argv + 1, argc - 1);
 }
