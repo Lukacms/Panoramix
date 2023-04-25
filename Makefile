@@ -22,6 +22,7 @@ OBJ_MAIN	=	$(SRC_MAIN:.c=.o)
 SRC_TESTS	=	tests/tests_redirect.c	\
 				tests/tests_parse_args.c	\
 				tests/tests_utils.c	\
+				tests/tests_battles.c	\
 
 OBJ_TESTS	=	$(SRC_TESTS:.c=.o)
 
