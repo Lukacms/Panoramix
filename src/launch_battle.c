@@ -18,7 +18,7 @@ static druid_t druid = {0};
 static villager_t *villagers = NULL;
 static pthread_mutex_t potion;
 static sem_t *sem;
-static bool to_wake = false;
+static int to_wake = -1;
 
 static void drink_potion(size_t ind)
 {
@@ -27,10 +27,10 @@ static void drink_potion(size_t ind)
         printf(VILLAGER_POTION, ind, druid.pot_left);
         druid.pot_left -= 1;
         villagers[ind].fighting = true;
-    } else if (druid.nb_refills > 0 && druid.sleeping && !to_wake) {
+    } else if (druid.nb_refills > 0 && druid.sleeping && to_wake < 0) {
         printf(VILLAGER_POTION, ind, druid.pot_left);
         printf(VILLAGER_CALL, ind);
-        to_wake = true;
+        to_wake = ind;
     }
     pthread_mutex_unlock(&potion);
     if (villagers[ind].fights_left > 0 && druid.nb_refills == 0 &&
@@ -67,12 +67,13 @@ static void *druid_sleeping(void __attribute__((unused)) * data)
         if (!villagers_fighting(villagers))
             break;
         pthread_mutex_lock(&potion);
-        if (to_wake && druid.pot_left == 0 && druid.nb_refills > 0) {
-            druid.pot_left = druid.pot_size;
+        if (to_wake > -1 && druid.pot_left == 0 && druid.nb_refills > 0) {
+            druid.pot_left = druid.pot_size - 1;
+            villagers[to_wake].fighting = true;
             druid.nb_refills -= 1;
             printf(DRUID_REFILL, druid.nb_refills);
-            to_wake = false;
             druid.sleeping = false;
+            to_wake = -1;
         }
         if (druid.pot_left == 0)
             druid.sleeping = true;
