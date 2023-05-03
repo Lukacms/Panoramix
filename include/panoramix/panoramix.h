@@ -39,7 +39,7 @@
 /* Druid messages */
 #define DRUID_START "Druid: I'm ready... but sleepy...\n"
 #define DRUID_REFILL \
-    "Druid: Ah! Yes, yes , I'm awake! Working on it! Beware I can only make " \
+    "Druid: Ah! Yes, yes, I'm awake! Working on it! Beware I can only make " \
     "%zu more refills after this one.\n"
 #define DRUID_SLEEP "Druid: I'm out of viscum. I'm going back to... zZz\n"
 
