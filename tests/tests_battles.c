@@ -38,7 +38,7 @@ Test(launch_battle, imperfect_case_1, .init = redirect)
 Test(launch_battle, imperfect_case_2, .init = redirect)
 {
     panoramix_t pano = {0};
-    char *const argv[] = {"./panoramix", "3", "9", "3", "3"};
+    char *const argv[] = {"./panoramix", "2", "3", "3", "2"};
 
     cr_assert_eq(parse_args(&pano, ARGS_REQUIRED, argv), EPI_SUCCESS);
     cr_assert_eq(launch_battle(&pano), EPI_SUCCESS);
